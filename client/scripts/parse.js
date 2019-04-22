@@ -1,9 +1,22 @@
-var Parse = {
+let Parse = {
 
   server: `http://parse.${window.CAMPUS}.hackreactor.com/chatterbox/classes/messages`,
 
-  create: function(message, successCB, errorCB = null) {
-    // todo: save a message to the server
+  create: function(message) {
+    $.ajax({
+      // This is the url you should use to communicate with the parse API server.
+      url: Parse.server,
+      type: 'POST',
+      data: JSON.stringify(message),
+      contentType: 'application/json',
+      success: () => {
+        console.log('chatterbox: Message sent');
+      },
+      error: (error) => {
+        // See: https://developer.mozilla.org/en-US/docs/Web/API/console.error
+        console.error('chatterbox: Failed to send message', error);
+      }
+    });
   },
 
   readAll: function(successCB, errorCB = null) {

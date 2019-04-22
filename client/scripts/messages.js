@@ -1,4 +1,3 @@
-var Messages = {
-
-
+let Messages = {
+  results : []
 };
